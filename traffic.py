@@ -14,6 +14,7 @@ TEST_SIZE = 0.4
 
 
 def load_data(data_dir):
+
     images = []
     labels = []
 
@@ -39,11 +40,11 @@ def get_model():
             tf.keras.layers.Conv2D(
                 32, (3, 3), activation="relu", input_shape=(IMG_WIDTH, IMG_HEIGHT, 3)
             ),
-            tf.keras.layers.MaxPooling2D((2, 2)),
+            tf.keras.layers.MaxPool2D((2, 2)),
             tf.keras.layers.Conv2D(64, (3, 3), activation="relu"),
-            tf.keras.layers.MaxPooling2D((2, 2)),
+            tf.keras.layers.MaxPool2D((2, 2)),
             tf.keras.layers.Conv2D(128, (3, 3), activation="relu"),
-            tf.keras.layers.MaxPooling2D((2, 2)),
+            tf.keras.layers.MaxPool2D((2, 2)),
             tf.keras.layers.Flatten(),
             tf.keras.layers.Dense(units=128, activation="relu"),
             # Dropout to prevent overfitting
@@ -74,9 +75,9 @@ def main():
 
     model = get_model()
 
-    model.fit(x_train, y_train, epochs=EPOCHS)
+    model.fit(x_test, y_test, epochs=EPOCHS)
 
-    model.evaluate(x_test, y_test, verbose=2)
+    model.fit(x_train, y_train, verbose=2)
 
     if len(sys.argv) == 3:
         filename = sys.argv[2]
